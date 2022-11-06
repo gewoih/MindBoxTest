@@ -1,29 +1,49 @@
-﻿using MindBoxLib.Interfaces;
+﻿using MindBoxLib.Extensions;
+using MindBoxLib.Interfaces;
 using System;
 
 namespace MindBoxLib
 {
 	public class Circle : IGeometricShape
 	{
-		private readonly double Radius;
+		private readonly double radius;
 
-		/// <summary>
-		/// Конструктор для создания окружности
-		/// </summary>
-		/// <param name="radius">Радиус окружности</param>
 		public Circle(double radius)
 		{
-			if (radius <= 0)
-				throw new ArgumentException("Радиус окружности не может быть меньше 0!");
-			if (Double.IsNaN(radius))
-				throw new ArgumentException("Радиус окружности должен быть числом!");
+            this.radius = radius;
 
-			this.Radius = radius;
+            ValidateRadius();
 		}
 
+		/// <summary>
+		/// Returns an area of Circle
+		/// </summary>
+		/// <returns></returns>
 		public double GetArea()
 		{
-			return Math.PI * Math.Pow(Radius, 2);
+			return Math.PI * Math.Pow(radius, 2);
 		}
-	}
+
+		private void ValidateRadius()
+		{
+			ValidateRadiusIsFiniteNumber();
+			ValidateRadiusIsPositiveNumber();
+        }
+
+		private void ValidateRadiusIsFiniteNumber()
+		{
+			if (!radius.IsFiniteNumber())
+			{
+				throw new ArgumentException("Radius of the circle must be finite number.");
+			}
+		}
+
+        private void ValidateRadiusIsPositiveNumber()
+        {
+			if (!radius.IsPositive())
+			{
+				throw new ArgumentException("Radius of the circle must be positive number.");
+			}
+        }
+    }
 }

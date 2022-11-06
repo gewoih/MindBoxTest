@@ -1,14 +1,11 @@
 ﻿namespace MindBoxLib.Interfaces
 {
-	/// <summary>
-	/// Интерфейс для геометрических фигур
-	/// </summary>
 	public interface IGeometricShape
 	{
 		/// <summary>
-		/// Вычисление площади геометрической фигуры
+		/// Returns an area of some Geometric Shape
 		/// </summary>
-		/// <returns>Площадь в квадратичных единицах</returns>
+		/// <returns></returns>
 		public double GetArea();
 	}
 }

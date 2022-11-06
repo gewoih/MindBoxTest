@@ -1,69 +1,89 @@
-﻿using MindBoxLib.Interfaces;
+﻿using MindBoxLib.Extensions;
+using MindBoxLib.Interfaces;
 using System;
 
 namespace MindBoxLib
 {
 	public class Triangle : IGeometricShape
 	{
-		private readonly double A;
-		private readonly double B;
-		private readonly double C;
-		public bool IsRight
-		{
-			get
-			{
-				//Сначала ищем самую большую сторону треугольника
-				if (Math.Max(this.A, this.B) == this.A)
-				{
-					if (Math.Max(this.A, this.C) == this.A)
-					{
-						//А - максимум
-						if (Math.Pow(this.B, 2) + Math.Pow(this.C, 2) == Math.Pow(this.A, 2))
-							return true;
-					}
-					//C - максимум
-					if (Math.Pow(this.A, 2) + Math.Pow(this.B, 2) == Math.Pow(this.C, 2))
-						return true;
-				}
-				else if (Math.Max(this.B, this.C) == this.B)
-				{
-					//B - максимум
-					if (Math.Pow(this.A, 2) + Math.Pow(this.C, 2) == Math.Pow(this.B, 2))
-						return true;
-				}
-				//С - максимум
-				else if (Math.Pow(this.A, 2) + Math.Pow(this.B, 2) == Math.Pow(this.C, 2))
-					return true;
+		private readonly double firstSide;
+		private readonly double secondSide;
+		private readonly double thirdSide;
 
-				return false;
-			}
+		public Triangle(double firstSide, double secondSide, double thirdSide)
+		{
+            this.firstSide = firstSide;
+            this.secondSide = secondSide;
+            this.thirdSide = thirdSide;
+
+            ValidateTriangleSides();
 		}
 
 		/// <summary>
-		/// Конструктор для создания треугольника
+		/// Returns an area of Triangle
 		/// </summary>
-		/// <param name="a">Сторона треугольника A</param>
-		/// <param name="b">Сторона треугольника B</param>
-		/// <param name="c">Сторона треугольника C</param>
-		public Triangle(double a, double b, double c)
-		{
-			if (a <= 0 || b <= 0 || c <= 0)
-				throw new ArgumentException("Все строны треугольника должны быть больше нуля!");
-			if (a + b < c || a + c < b || b + c < a)
-				throw new ArithmeticException("Заданные стороны не образуют треугольник!");
-
-			this.A = a;
-			this.B = b;
-			this.C = c;
-		}
-
-		//Расчет площади треугольника по формуле Герона
+		/// <returns></returns>
 		public double GetArea()
 		{
-			//Полупериметр
-			double perimeter = (this.A + this.B + this.C) / 2;
+			double triangleSemiperimeter = (firstSide + secondSide + thirdSide) / 2;
+			double circleArea = Math.Sqrt(triangleSemiperimeter *
+									(triangleSemiperimeter - firstSide) *
+									(triangleSemiperimeter - secondSide) *
+									(triangleSemiperimeter - thirdSide));
 
-			return Math.Sqrt(perimeter * (perimeter - this.A) * (perimeter - this.B) * (perimeter - this.C));
+            return circleArea;
 		}
-	}
+
+        /// <summary>
+        /// Determines whether the Triangle is right
+        /// </summary>
+        /// <returns></returns>
+        public bool IsRight()
+		{
+			double firstSideSquared = Math.Pow(firstSide, 2);
+			double secondSideSquared = Math.Pow(secondSide, 2);
+			double thirdSideSquared = Math.Pow(thirdSide, 2);
+
+			if (firstSideSquared + secondSideSquared != thirdSideSquared &&
+				secondSideSquared + thirdSideSquared != firstSideSquared &&
+				thirdSideSquared + firstSideSquared != secondSideSquared)
+			{
+				return false;
+			}
+			
+			return true;
+		}
+
+		private void ValidateTriangleSides()
+        {
+			ValidateSidesAreFiniteNumbers();
+			ValidateSidesArePositiveNumbers();
+			ValidateSidesFormTriangle();
+        }
+
+		private void ValidateSidesAreFiniteNumbers()
+		{
+            if (!firstSide.IsFiniteNumber() || !firstSide.IsFiniteNumber() || !firstSide.IsFiniteNumber())
+            {
+                throw new ArgumentException("All sides of the triangle must be numbers.");
+            }
+        }
+
+		private void ValidateSidesArePositiveNumbers()
+		{
+            if (!firstSide.IsPositive() || !secondSide.IsPositive() || !thirdSide.IsPositive())
+            {
+                throw new ArgumentException("All sides of the triangle must be positive numbers.");
+            }
+        }
+
+		private void ValidateSidesFormTriangle()
+		{
+
+            if (firstSide + secondSide < thirdSide || firstSide + thirdSide < secondSide || secondSide + thirdSide < firstSide)
+            {
+                throw new ArithmeticException("The given sides don't form a triangle.");
+            }
+        }
+    }
 }
