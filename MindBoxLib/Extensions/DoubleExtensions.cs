@@ -34,9 +34,9 @@ namespace MindBoxLib.Extensions
         /// <exception cref="ArgumentException"></exception>
         public static bool IsEqualsWithPrecision(this double leftValue, double rightValue, int precision)
         {
-            if (precision < 1)
+            if (precision < 0)
             {
-                throw new ArgumentException("Precision value must be greater or equal than 1.");
+                throw new ArgumentException("Precision value must be greater or equal than 0.");
             }
 
             double precisionValue = 1 / Math.Pow(10, precision);
