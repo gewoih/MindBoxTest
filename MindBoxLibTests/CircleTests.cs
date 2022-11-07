@@ -22,9 +22,9 @@ namespace MindBoxLibTests
         public void Constructor_NonPositiveRadius_ThrowsArgumentException(double radius)
         {
             TestDelegate actual = () =>
-                {
-                    Circle circle = new(radius);
-                };
+            {
+                Circle circle = new(radius);
+            };
 
             Assert.Throws<ArgumentException>(actual);
         }
@@ -35,9 +35,9 @@ namespace MindBoxLibTests
         public void Constructor_NonFiniteRadius_ThrowsArgumentException(double radius)
         {
             TestDelegate actual = () =>
-                {
-                    Circle circle = new(radius);
-                };
+            {
+                Circle circle = new(radius);
+            };
 
             Assert.Throws<ArgumentException>(actual);
         }
