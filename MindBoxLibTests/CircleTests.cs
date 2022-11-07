@@ -1,6 +1,5 @@
 ﻿using MindBoxLib.Classes;
 using MindBoxLib.Extensions;
-using MindBoxLib.Interfaces;
 
 namespace MindBoxLibTests
 {
@@ -11,7 +10,7 @@ namespace MindBoxLibTests
         [TestCase(5.782, 105.02823, 5)]
         public void GetCircleAreaWithPositiveRadius(double radius, double expectedArea, int precision)
         {
-            IGeometricShape circle = new Circle(radius);
+            Circle circle = new(radius);
 
             double circleArea = circle.GetArea();
 
@@ -22,17 +21,10 @@ namespace MindBoxLibTests
         [TestCase(-1)]
         public void TryCreateCircleWithNonPositiveRadius(double radius)
         {
-            try
-            {
-                IGeometricShape circle = new Circle(radius);
-            }
-            catch (ArgumentException)
-            {
-                Assert.True(true);
-                return;
-            }
-
-            Assert.True(false);
+            Assert.Throws<ArgumentException>(() =>
+                {
+                    Circle circle = new Circle(radius);
+                });
         }
 
         [TestCase(double.NaN)]
@@ -40,17 +32,10 @@ namespace MindBoxLibTests
         [TestCase(double.PositiveInfinity)]
         public void TryCreateCircleWithNonFiniteRadius(double radius)
         {
-            try
-            {
-                IGeometricShape circle = new Circle(radius);
-            }
-            catch (ArgumentException)
-            {
-                Assert.True(true);
-                return;
-            }
-
-            Assert.True(false);
+            Assert.Throws<ArgumentException>(() =>
+                {
+                    Circle circle = new(radius);
+                });
         }
     }
 }
