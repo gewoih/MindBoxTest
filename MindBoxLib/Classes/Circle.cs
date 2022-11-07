@@ -6,11 +6,11 @@ namespace MindBoxLib.Classes
 {
     public class Circle : IGeometricShape
     {
-        private readonly double radius;
+        public double Radius { get; }
 
         public Circle(double radius)
         {
-            this.radius = radius;
+            Radius = radius;
 
             ValidateRadius();
         }
@@ -18,10 +18,9 @@ namespace MindBoxLib.Classes
         /// <summary>
         /// Returns an area of Circle
         /// </summary>
-        /// <returns></returns>
         public double GetArea()
         {
-            return Math.PI * Math.Pow(radius, 2);
+            return Math.PI * Math.Pow(Radius, 2);
         }
 
         private void ValidateRadius()
@@ -32,7 +31,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateRadiusIsFiniteNumber()
         {
-            if (!radius.IsFiniteNumber())
+            if (!Radius.IsFiniteNumber())
             {
                 throw new ArgumentException("Radius of the circle must be finite number.");
             }
@@ -40,7 +39,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateRadiusIsPositiveNumber()
         {
-            if (!radius.IsPositive())
+            if (!Radius.IsPositive())
             {
                 throw new ArgumentException("Radius of the circle must be positive number.");
             }
