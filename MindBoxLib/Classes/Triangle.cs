@@ -61,7 +61,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateSidesAreFiniteNumbers()
         {
-            if (!FirstSide.IsFiniteNumber() || !FirstSide.IsFiniteNumber() || !FirstSide.IsFiniteNumber())
+            if (!FirstSide.IsFiniteNumber() || !SecondSide.IsFiniteNumber() || !ThirdSide.IsFiniteNumber())
             {
                 throw new ArgumentException("All sides of the triangle must be numbers.");
             }
@@ -79,7 +79,7 @@ namespace MindBoxLib.Classes
         {
             if (FirstSide + SecondSide < ThirdSide || FirstSide + ThirdSide < SecondSide || SecondSide + ThirdSide < FirstSide)
             {
-                throw new ArithmeticException("The given sides don't form a triangle.");
+                throw new ArgumentException("The given sides don't form a triangle.");
             }
         }
     }
