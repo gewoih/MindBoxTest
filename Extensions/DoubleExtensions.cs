@@ -1,4 +1,6 @@
-﻿namespace MindBoxLib.Extensions
+﻿using System;
+
+namespace MindBoxLib.Extensions
 {
     public static class DoubleExtensions
     {
@@ -23,6 +25,25 @@
         public static bool IsPositive(this double value)
         {
             return value > 0;
+        }
+
+        /// <summary>
+        /// Determines wheter the <paramref name="leftValue"/> 
+        /// equals to <paramref name="rightValue"/> 
+        /// with <paramref name="precision"/> digits after floating point
+        /// </summary>
+        /// <param name="leftValue"></param>
+        /// <param name="rightValue"></param>
+        /// <param name="precision">Precision of double values comparison</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static bool IsEqualsWithPrecision(this double leftValue, double rightValue, int precision)
+        {
+            if (precision < 1)
+                throw new ArgumentException("Precision value must be greater or equal than 1.");
+
+            double precisionValue = 1 / Math.Pow(10, precision);
+            return Math.Abs(leftValue - rightValue) < precisionValue;
         }
     }
 }
