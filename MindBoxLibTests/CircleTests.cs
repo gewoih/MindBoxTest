@@ -8,7 +8,7 @@ namespace MindBoxLibTests
         [TestCase(0.1, 0.031416, 6)]
         [TestCase(1, Math.PI, 6)]
         [TestCase(5.782, 105.02823, 5)]
-        public void GetCircleAreaWithPositiveRadius(double radius, double expectedArea, int precision)
+        public void GetArea_FinitePositiveRadius_CorrectArea(double radius, double expectedArea, int precision)
         {
             Circle circle = new(radius);
 
@@ -19,23 +19,27 @@ namespace MindBoxLibTests
 
         [TestCase(0)]
         [TestCase(-1)]
-        public void TryCreateCircleWithNonPositiveRadius(double radius)
+        public void Constructor_NonPositiveRadius_ThrowsArgumentException(double radius)
         {
-            Assert.Throws<ArgumentException>(() =>
+            TestDelegate actual = () =>
                 {
-                    Circle circle = new Circle(radius);
-                });
+                    Circle circle = new(radius);
+                };
+
+            Assert.Throws<ArgumentException>(actual);
         }
 
         [TestCase(double.NaN)]
         [TestCase(double.NegativeInfinity)]
         [TestCase(double.PositiveInfinity)]
-        public void TryCreateCircleWithNonFiniteRadius(double radius)
+        public void Constructor_NonFiniteRadius_ThrowsArgumentException(double radius)
         {
-            Assert.Throws<ArgumentException>(() =>
+            TestDelegate actual = () =>
                 {
                     Circle circle = new(radius);
-                });
+                };
+
+            Assert.Throws<ArgumentException>(actual);
         }
     }
 }
