@@ -6,15 +6,15 @@ namespace MindBoxLib.Classes
 {
     public class Triangle : IGeometricShape
     {
-        private readonly double firstSide;
-        private readonly double secondSide;
-        private readonly double thirdSide;
+        public double FirstSide { get; }
+        public double SecondSide { get; }
+        public double ThirdSide { get; }
 
         public Triangle(double firstSide, double secondSide, double thirdSide)
         {
-            this.firstSide = firstSide;
-            this.secondSide = secondSide;
-            this.thirdSide = thirdSide;
+            FirstSide = firstSide;
+            SecondSide = secondSide;
+            ThirdSide = thirdSide;
 
             ValidateTriangleSides();
         }
@@ -22,14 +22,13 @@ namespace MindBoxLib.Classes
         /// <summary>
         /// Returns an area of Triangle
         /// </summary>
-        /// <returns></returns>
         public double GetArea()
         {
-            double triangleSemiperimeter = (firstSide + secondSide + thirdSide) / 2;
+            double triangleSemiperimeter = (FirstSide + SecondSide + ThirdSide) / 2;
             double circleArea = Math.Sqrt(triangleSemiperimeter *
-                                    (triangleSemiperimeter - firstSide) *
-                                    (triangleSemiperimeter - secondSide) *
-                                    (triangleSemiperimeter - thirdSide));
+                                    (triangleSemiperimeter - FirstSide) *
+                                    (triangleSemiperimeter - SecondSide) *
+                                    (triangleSemiperimeter - ThirdSide));
 
             return circleArea;
         }
@@ -37,16 +36,15 @@ namespace MindBoxLib.Classes
         /// <summary>
         /// Determines whether the Triangle is right
         /// </summary>
-        /// <returns></returns>
         public bool IsRight()
         {
-            double firstSideSquared = Math.Pow(firstSide, 2);
-            double secondSideSquared = Math.Pow(secondSide, 2);
-            double thirdSideSquared = Math.Pow(thirdSide, 2);
+            double FirstSideSquared = Math.Pow(FirstSide, 2);
+            double secondSideSquared = Math.Pow(SecondSide, 2);
+            double thirdSideSquared = Math.Pow(ThirdSide, 2);
 
-            if (firstSideSquared + secondSideSquared != thirdSideSquared &&
-                secondSideSquared + thirdSideSquared != firstSideSquared &&
-                thirdSideSquared + firstSideSquared != secondSideSquared)
+            if (FirstSideSquared + secondSideSquared != thirdSideSquared &&
+                secondSideSquared + thirdSideSquared != FirstSideSquared &&
+                thirdSideSquared + FirstSideSquared != secondSideSquared)
             {
                 return false;
             }
@@ -63,7 +61,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateSidesAreFiniteNumbers()
         {
-            if (!firstSide.IsFiniteNumber() || !firstSide.IsFiniteNumber() || !firstSide.IsFiniteNumber())
+            if (!FirstSide.IsFiniteNumber() || !FirstSide.IsFiniteNumber() || !FirstSide.IsFiniteNumber())
             {
                 throw new ArgumentException("All sides of the triangle must be numbers.");
             }
@@ -71,7 +69,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateSidesArePositiveNumbers()
         {
-            if (!firstSide.IsPositive() || !secondSide.IsPositive() || !thirdSide.IsPositive())
+            if (!FirstSide.IsPositive() || !SecondSide.IsPositive() || !ThirdSide.IsPositive())
             {
                 throw new ArgumentException("All sides of the triangle must be positive numbers.");
             }
@@ -79,8 +77,7 @@ namespace MindBoxLib.Classes
 
         private void ValidateSidesFormTriangle()
         {
-
-            if (firstSide + secondSide < thirdSide || firstSide + thirdSide < secondSide || secondSide + thirdSide < firstSide)
+            if (FirstSide + SecondSide < ThirdSide || FirstSide + ThirdSide < SecondSide || SecondSide + ThirdSide < FirstSide)
             {
                 throw new ArithmeticException("The given sides don't form a triangle.");
             }
