@@ -4,7 +4,7 @@ using System;
 
 namespace MindBoxLib.Classes
 {
-    public class Triangle : IGeometricShape
+    public sealed class Triangle : IGeometricShape
     {
         public double FirstSide { get; }
         public double SecondSide { get; }

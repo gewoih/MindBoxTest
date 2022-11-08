@@ -4,7 +4,7 @@ using System;
 
 namespace MindBoxLib.Classes
 {
-    public class Circle : IGeometricShape
+    public sealed class Circle : IGeometricShape
     {
         public double Radius { get; }
 
