@@ -25,12 +25,12 @@ namespace MindBoxLib.Classes
         public double GetArea()
         {
             double triangleSemiperimeter = (FirstSide + SecondSide + ThirdSide) / 2;
-            double circleArea = Math.Sqrt(triangleSemiperimeter *
+            double triangleArea = Math.Sqrt(triangleSemiperimeter *
                                     (triangleSemiperimeter - FirstSide) *
                                     (triangleSemiperimeter - SecondSide) *
                                     (triangleSemiperimeter - ThirdSide));
 
-            return circleArea;
+            return triangleArea;
         }
 
         /// <summary>
@@ -38,18 +38,13 @@ namespace MindBoxLib.Classes
         /// </summary>
         public bool IsRight()
         {
-            double FirstSideSquared = Math.Pow(FirstSide, 2);
+            double firstSideSquared = Math.Pow(FirstSide, 2);
             double secondSideSquared = Math.Pow(SecondSide, 2);
             double thirdSideSquared = Math.Pow(ThirdSide, 2);
 
-            if (FirstSideSquared + secondSideSquared != thirdSideSquared &&
-                secondSideSquared + thirdSideSquared != FirstSideSquared &&
-                thirdSideSquared + FirstSideSquared != secondSideSquared)
-            {
-                return false;
-            }
-
-            return true;
+            return firstSideSquared + secondSideSquared == thirdSideSquared
+                   || secondSideSquared + thirdSideSquared == firstSideSquared
+                   || thirdSideSquared + firstSideSquared == secondSideSquared;
         }
 
         private void ValidateTriangleSides()
