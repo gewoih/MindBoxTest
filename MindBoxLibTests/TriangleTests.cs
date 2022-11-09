@@ -13,7 +13,7 @@ namespace MindBoxLibTests
 
             double triangleArea = triangle.GetArea();
 
-            Assert.That(triangleArea.IsEqualsWithPrecision(expectedArea, precision), Is.True);
+            Assert.That(triangleArea.EqualsWithPrecision(expectedArea, precision), Is.True);
         }
 
 

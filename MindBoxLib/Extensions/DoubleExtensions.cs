@@ -32,7 +32,7 @@ namespace MindBoxLib.Extensions
         /// </summary>
         /// <param name="precision">Precision of double values comparison</param>
         /// <exception cref="ArgumentException"></exception>
-        public static bool IsEqualsWithPrecision(this double leftValue, double rightValue, int precision)
+        public static bool EqualsWithPrecision(this double leftValue, double rightValue, int precision)
         {
             if (precision < 0)
             {

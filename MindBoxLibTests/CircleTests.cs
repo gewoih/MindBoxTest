@@ -14,7 +14,7 @@ namespace MindBoxLibTests
 
             double circleArea = circle.GetArea();
 
-            Assert.That(circleArea.IsEqualsWithPrecision(expectedArea, precision), Is.EqualTo(true));
+            Assert.That(circleArea.EqualsWithPrecision(expectedArea, precision), Is.EqualTo(true));
         }
 
         [TestCase(0)]
