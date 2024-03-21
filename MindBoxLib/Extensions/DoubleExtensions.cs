@@ -9,12 +9,7 @@ namespace MindBoxLib.Extensions
         /// </summary>
         public static bool IsFiniteNumber(this double value)
         {
-            if (double.IsInfinity(value) || double.IsNaN(value))
-            {
-                return false;
-            }
-
-            return true;
+            return !double.IsInfinity(value) && !double.IsNaN(value);
         }
 
         /// <summary>
@@ -26,7 +21,7 @@ namespace MindBoxLib.Extensions
         }
 
         /// <summary>
-        /// Determines wheter the <paramref name="leftValue"/> 
+        /// Determines whether the <paramref name="leftValue"/> 
         /// equals to <paramref name="rightValue"/> 
         /// with <paramref name="precision"/> digits after floating point
         /// </summary>
@@ -35,11 +30,9 @@ namespace MindBoxLib.Extensions
         public static bool EqualsWithPrecision(this double leftValue, double rightValue, int precision)
         {
             if (precision < 0)
-            {
                 throw new ArgumentException("Precision value must be greater or equal than 0.");
-            }
 
-            double precisionValue = 1 / Math.Pow(10, precision);
+            var precisionValue = 1 / Math.Pow(10, precision);
             return Math.Abs(leftValue - rightValue) < precisionValue;
         }
     }
