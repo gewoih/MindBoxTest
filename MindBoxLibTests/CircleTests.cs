@@ -12,7 +12,7 @@ namespace MindBoxLibTests
         {
             Circle circle = new(radius);
 
-            double circleArea = circle.GetArea();
+            var circleArea = circle.CalculateArea();
 
             Assert.That(circleArea.EqualsWithPrecision(expectedArea, precision), Is.EqualTo(true));
         }
@@ -23,7 +23,7 @@ namespace MindBoxLibTests
         {
             TestDelegate actual = () =>
             {
-                Circle circle = new(radius);
+                _ = new Circle(radius);
             };
 
             Assert.Throws<ArgumentException>(actual);
@@ -36,7 +36,7 @@ namespace MindBoxLibTests
         {
             TestDelegate actual = () =>
             {
-                Circle circle = new(radius);
+                _ = new Circle(radius);
             };
 
             Assert.Throws<ArgumentException>(actual);
