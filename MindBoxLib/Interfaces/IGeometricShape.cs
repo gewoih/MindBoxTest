@@ -5,6 +5,6 @@
         /// <summary>
         /// Returns an area of some Geometric Shape
         /// </summary>
-        public double GetArea();
+        public double CalculateArea();
     }
 }

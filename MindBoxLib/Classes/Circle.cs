@@ -10,39 +10,19 @@ namespace MindBoxLib.Classes
 
         public Circle(double radius)
         {
+            ValidateRadius(radius);
             Radius = radius;
-
-            ValidateRadius();
         }
 
         /// <summary>
         /// Returns an area of Circle
         /// </summary>
-        public double GetArea()
-        {
-            return Math.PI * Math.Pow(Radius, 2);
-        }
+        public double CalculateArea() => Math.PI * Math.Pow(Radius, 2);
 
-        private void ValidateRadius()
+        private static void ValidateRadius(double radius)
         {
-            ValidateRadiusIsFiniteNumber();
-            ValidateRadiusIsPositiveNumber();
-        }
-
-        private void ValidateRadiusIsFiniteNumber()
-        {
-            if (!Radius.IsFiniteNumber())
-            {
-                throw new ArgumentException("Radius of the circle must be finite number.");
-            }
-        }
-
-        private void ValidateRadiusIsPositiveNumber()
-        {
-            if (!Radius.IsPositive())
-            {
-                throw new ArgumentException("Radius of the circle must be positive number.");
-            }
+            if (!radius.IsFiniteNumber() || !radius.IsPositive())
+                throw new ArgumentException("Radius of the circle must be finite positive number.");
         }
     }
 }
