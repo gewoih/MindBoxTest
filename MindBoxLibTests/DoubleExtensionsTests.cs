@@ -21,9 +21,9 @@ namespace MindBoxLibTests
         [TestCase(1.13, 1.14, 2, false)]
         public void IsEqualsWithPrecision_FinitePositiveValues_ExpectedResult(double leftValue, double rightValue, int precision, bool expected)
         {
-            bool actual = leftValue.EqualsWithPrecision(rightValue, precision);
+            var actual = leftValue.EqualsWithPrecision(rightValue, precision);
 
-            Assert.That(Is.Equals(actual, expected), Is.True);
+            Assert.That(actual, Is.EqualTo(expected));
         }
     }
 }
